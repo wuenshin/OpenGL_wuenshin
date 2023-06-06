@@ -365,6 +365,71 @@ void dron(float x, float y) {
     glPopMatrix();
 }
 
+void ProcessKeys(unsigned char key, int x, int y)
+{
+    if (key == 'w') {
+
+        if (pos_y < 0.2)
+        {
+            pos_y += 0.01;
+        }
+        glutPostRedisplay();
+        isRight = false;
+    }
+    if (key == 's') {
+
+
+        if (pos_y > -0.8)
+        {
+            pos_y -= 0.01;
+        }
+        glutPostRedisplay();
+        isRight = false;
+    }
+    if (key == 'd')
+    {
+
+        if (pos_x < 0.8)
+        {
+            pos_x += 0.01;
+        }
+
+
+        glutPostRedisplay();
+        isRight = true;
+    }
+
+
+
+    if (key == 'a')
+    {
+        if (pos_x > -0.8)
+        {
+            pos_x -= 0.01;
+        }
+        glutPostRedisplay();
+
+        isRight = false;
+
+    }
+}
+
+GLfloat RandomX()
+{
+    float min = -0.9;
+    float max = 0.9;
+    return (max - min) * ((double)rand() / (double)RAND_MAX) + min;
+    return GLfloat();
+}
+
+GLfloat RandomY()
+{
+    float min = -0.7;
+    float max = 0.2;
+    return (max - min) * ((double)rand() / (double)RAND_MAX) + min;
+    return GLfloat();
+}
+
 
 
 auto getRandomNum()
@@ -376,138 +441,3 @@ auto getRandomNum()
 
 }
 
-void ProcessKeys(unsigned char key, int x, int y) {
-
-
-    if (key == 'w') {
-        auto randomNum = getRandomNum();
-        for (auto i = 0; i < 34; i++)
-        {
-            float distance = sqrt(pow(pos_x - x_arr[i] - 0.1, 2) + pow(pos_y - y_arr[i] - 0.1, 2));
-            if (distance < 0.02f)
-            {
-                x_arr[i] = -10.0f;
-                y_arr[i] = -10.0f;
-                fishCount++;
-                std::cout << "fish catched:" << fishCount << "\n";
-                glutPostRedisplay();
-            }
-            // glutSwapBuffers();
-             glutPostRedisplay();
-        }
-        if (pos_y < 0.2)
-        {
-            pos_y += 0.01;
-        }
-        for (auto i = 0; i < 35; i++)
-        {
-            x_arr[i] += 0.001;
-          
-            glutPostRedisplay();
-        }
-        isRight = false;
-    }
-    if (key == 's') {
-        auto randomNum = getRandomNum();
-        
-     //   pos_y -= 0.01;
-        for (auto i = 0; i < 35; i++)
-        {
-            float distance = sqrt(pow(pos_x - x_arr[i] - 0.1, 2) + pow(pos_y - y_arr[i] - 0.1, 2));
-            if (distance < 0.02f)
-            {
-                x_arr[i] = -10.0f;
-                y_arr[i] = -10.0f;
-                fishCount++;
-                std::cout << "fish catched:" << fishCount << "\n";
-            }
-            glutPostRedisplay();
-        }
-        for (auto i = 0; i < 35; i++)
-        {
-            x_arr[i] -= 0.001;
-            glutPostRedisplay();
-        }
-       
-       if  (pos_y > -0.8)
-        {
-            pos_y -= 0.01;
-        }
-        isRight = false;
-    }
-    if (key == 'd') {
-        auto randomNum = getRandomNum();
-        if (pos_x < 0.8)
-        {
-            pos_x += 0.01;
-        }
-            
-        
-        for (auto i = 0; i < 35; i++)
-        {
-            float distance = sqrt(pow(pos_x - x_arr[i] - 0.1, 2) + pow(pos_y - y_arr[i] - 0.1, 2));
-            if (distance < 0.02f)
-            {
-                x_arr[i] = -10.0f;
-                y_arr[i] = -10.0f;
-                fishCount++;
-                std::cout << "fish catched:" << fishCount << "\n";
-            }
-            glutPostRedisplay();
-        }
-        for (auto i = 0; i < 35; i++)
-        {
-            
-            y_arr[i] -= 0.001;
-            
-        
-            glutPostRedisplay();
-        }
-
-        isRight = true;
-    }
-    if (key == 'a') {
-        auto randomNum = getRandomNum();
-        if (pos_x > -0.8)
-        {
-            pos_x -= 0.01;
-        }
-        for (auto i = 0; i < 35; i++)
-        {
-            float distance = sqrt(pow(pos_x - x_arr[i] - 0.1, 2) + pow(pos_y - y_arr[i] - 0.1, 2));
-            if (distance < 0.05f)
-            {
-                x_arr[i] = -10.0f;
-                y_arr[i] = -10.0f;
-                fishCount++;
-                std::cout << "fish catched:" << fishCount << "\n";
-            }
-            glutPostRedisplay();
-        }
-        for (auto i = 0; i < 35; i++)
-        {
-            y_arr[i] += 0.001;
-
-            glutPostRedisplay();
-        }
-        
-        isRight = false;
-    }
-    
-    glutPostRedisplay();
-
-}
-
-
-
-GLfloat RandomX() {
-    GLfloat min = -0.9;
-    GLfloat max = 0.9;
-    return (max - min) * ((double)rand() / (double)RAND_MAX) + min;
-}
-
-GLfloat RandomY() {
-    GLfloat min = -0.7;
-    GLfloat max = 0.2;
-    return (max - min) * ((double)rand() / (double)RAND_MAX) + min;
-}
